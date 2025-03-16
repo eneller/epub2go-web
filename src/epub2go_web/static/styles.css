@@ -1,0 +1,11 @@
+tr:nth-child(even){
+    background-color: #EEEEEE;
+}
+.table-icon{
+    vertical-align: middle;
+    height: 1em;
+}
+.header-icon{
+    vertical-align: middle;
+    height: 1em;
+}

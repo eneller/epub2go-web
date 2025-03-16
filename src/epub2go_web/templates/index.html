@@ -1,11 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 <title>{{ title }}</title>
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
+        <div>
         <h1>{{ title }}</h1>
+        <a href="javascript:void(window.open('./?t='+encodeURIComponent(window.location.toString())))" title="Add this to your bookmarks"> <!--TODO fix domain part as variable-->
+            <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
+        </a>
+        <a href="https://github.com/eneller/epub2go.py">
+            <img src="{% static 'github.svg' %}" alt="GitHub" class="header-icon">
+        </a></div>
         <search>
             <form onsubmit="submitSearch(event)">
             <input type="su" id="searchInput" placeholder="Search">
@@ -13,51 +22,35 @@
         </search>
     </header>
     <table id="table">
-        {% for item in items %} 
+        <thead>
             <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in books %} 
+            <tr>
+            <td>
+                <a href= {{ item.url }} target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'open-link.svg' %}" alt="Open Link" class="table-icon">
+                </a>
+            </td>
             <td class="table-data">
                 <a href= {{ item.url }}>
                 {{ item.title }}
                 </a>
             </td> 
-            <td>Download</td>
+            <td>
+                <a> {{ item.author }}</a>
+            </td>
             </tr>
         {% endfor %} 
+        </tbody>
     </table>
 <footer>
-<a href="javascript:void(window.open('./?t='+encodeURIComponent(window.location.toString())))">Bookmarklet</a> <!--TODO fix domain part as variable-->
-<a href="https://github.com/eneller/epub2go.py">GitHub</a>
 </footer>
 </body>
 </html>
-<script>
-// get document references    
-const params = new URLSearchParams(window.location.search);
-const searchInput = document.getElementById('searchInput');
-const table = document.getElementById('table');
-const table_r = Array.from(table.getElementsByTagName('tr'));
-
-// allow search from url parameter
-let searchParam = params.get('s');
-if (searchParam){
-    searchInput.value = searchParam;
-    search(searchParam);
-}
-
-function submitSearch(event){
-    event.preventDefault();
-    search();
-}
-function search(searchStr = searchInput.value){
-    function showMatch(tr){
-        // match search with list
-        let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent)
-            .join(' ')
-            .indexOf(searchStr) > -1;
-        if (searchSuccess) tr.style.display = "";
-        else tr.style.display = "none";
-    }
-    table_r.map(showMatch, table_r);
-}
-
-</script>
+<script src="{% static 'script.js' %}"></script> 
