@@ -104,8 +104,8 @@ wheels = [
 
 [[package]]
 name = "epub2go"
-version = "1.3"
-source = { git = "https://github.com/eneller/epub2go.py#5ed44bdb0a812d3526802284b8c4524bf8cfaf17" }
+version = "2.0"
+source = { git = "https://github.com/eneller/epub2go.py#5d063d8597266fdfbfd924838be70b33fc4cbc34" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "click" },

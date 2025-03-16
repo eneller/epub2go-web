@@ -1,6 +1,10 @@
 tr:nth-child(even){
     background-color: #EEEEEE;
 }
+tr:hover{
+    background-color: #DDDDDD;
+    transition: all 2ms;
+}
 .table-icon{
     vertical-align: middle;
     height: 1em;

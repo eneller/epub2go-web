@@ -6,6 +6,8 @@ from epub2go.convert import get_all_books, Book, GBConvert
 
 import os
 
+converter = GBConvert(downloaddir=settings.MEDIA_ROOT)
+
 def index(request: HttpRequest):
     title = 'epub2go'
     targetParam = request.GET.get('t', None)
