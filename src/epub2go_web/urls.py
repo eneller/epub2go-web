@@ -16,29 +16,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from epub2go.convert import get_all_books, GBConvert, Book
 
-def root(request:HttpRequest):
-    title = 'epub2go'
-    targetParam = request.GET.get('t', None)
-    books = get_all_books()
-    if targetParam is not None:
-        getEpub(targetParam)
-    return render(request, 'index.html', locals())
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('',root, name='root')
+    path('',include('core.urls'))
 ]
-
-def getEpub(param):
-    print(param)
-    # TODO validate / sanitize input
-    # TODO check for existing file and age
-    # TODO download
-    # TODO redirect to loading page
-    # TODO redirect to download page
-    raise NotImplementedError
