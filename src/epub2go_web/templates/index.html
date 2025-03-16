@@ -1,15 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
 <title>{{ title }}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0" > 
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
         <div>
         <h1>{{ title }}</h1>
-        <a href="javascript:void(window.open('./?t='+encodeURIComponent(window.location.toString())))" title="Add this to your bookmarks"> <!--TODO fix domain part as variable-->
+        <p>Im Moment finden sich hier {{ book_count }} Bücher. </p>
+        <a href="javascript:void(window.open('./?t='+encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern"> <!--TODO fix domain part as variable-->
             <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
         </a>
         <a href="https://github.com/eneller/epub2go-web">
@@ -17,40 +20,43 @@
         </a></div>
         <search>
             <form onsubmit="submitSearch(event)">
-            <input type="su" id="searchInput" placeholder="Search">
+            <input type="su" id="searchInput" placeholder="Suchen">
             </form>
         </search>
     </header>
-    <table id="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Title</th>
-                <th>Author</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in books %} 
-            <tr>
-            <td>
-                <a href= {{ item.url }} target="_blank" rel="noopener noreferrer">
-                    <img src="{% static 'open-link.svg' %}" alt="Open Link" class="table-icon">
-                </a>
-            </td>
-            <td class="table-data">
-                <a href="./?t= {{ item.url }}">
-                {{ item.title }}
-                </a>
-            </td> 
-            <td>
-                <a> {{ item.author }}</a>
-            </td>
-            </tr>
-        {% endfor %} 
-        </tbody>
-    </table>
-<footer>
-</footer>
+    <main>
+        <!-- TODO use dl here-->
+        <table id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in books %} 
+                <tr>
+                <td>
+                    <a href= {{ item.url }} target="_blank" rel="noopener noreferrer">
+                        <img src="{% static 'open-link.svg' %}" alt="Open Link" class="table-icon">
+                    </a>
+                </td>
+                <td class="table-data">
+                    <a href="./?t= {{ item.url }}">
+                    {{ item.title }}
+                    </a>
+                </td> 
+                <td>
+                    <a> {{ item.author }}</a>
+                </td>
+                </tr>
+            {% endfor %} 
+            </tbody>
+        </table>
+    </main>
+    <footer>
+    </footer>
 </body>
 </html>
 <script src="{% static 'script.js' %}"></script> 

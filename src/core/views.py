@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, FileResponse
 from django.conf import settings
+from celery import shared_task
 
 from epub2go.convert import get_all_books, Book, GBConvert, allbooks_url
 
@@ -18,6 +19,7 @@ def index(request: HttpRequest):
     context = {
         'title': 'epub2go',
         'books': books,
+        'book_count': len(books),
     }
 
     targetParam = request.GET.get('t', None)
@@ -40,6 +42,7 @@ def validateUrl(param)->bool :
 
     return False
 
+@shared_task
 def getEpub(param):
     # TODO validate / sanitize input
     # TODO check for existing file and age
