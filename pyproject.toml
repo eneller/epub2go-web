@@ -5,6 +5,7 @@ description = "Web Interface to epub2go.py"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "celery>=5.4.0",
     "django>=5.1.6",
     "epub2go",
 ]
