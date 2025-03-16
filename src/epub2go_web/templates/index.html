@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ title }}</title>
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+        <search>
+            <form onsubmit="submitSearch(event)">
+            <input type="su" id="searchInput" placeholder="Search">
+            </form>
+        </search>
+    </header>
+    <table id="table">
+        {% for item in items %} 
+            <tr>
+            <td class="table-data">
+                <a href= {{ item.url }}>
+                {{ item.title }}
+                </a>
+            </td> 
+            <td>Download</td>
+            </tr>
+        {% endfor %} 
+    </table>
+<footer>
+<a href="javascript:void(window.open('./?t='+encodeURIComponent(window.location.toString())))">Bookmarklet</a> <!--TODO fix domain part as variable-->
+<a href="https://github.com/eneller/epub2go.py">GitHub</a>
+</footer>
+</body>
+</html>
+<script>
+// get document references    
+const params = new URLSearchParams(window.location.search);
+const searchInput = document.getElementById('searchInput');
+const table = document.getElementById('table');
+const table_r = Array.from(table.getElementsByTagName('tr'));
+
+// allow search from url parameter
+let searchParam = params.get('s');
+if (searchParam){
+    searchInput.value = searchParam;
+    search(searchParam);
+}
+
+function submitSearch(event){
+    event.preventDefault();
+    search();
+}
+function search(searchStr = searchInput.value){
+    function showMatch(tr){
+        // match search with list
+        let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent)
+            .join(' ')
+            .indexOf(searchStr) > -1;
+        if (searchSuccess) tr.style.display = "";
+        else tr.style.display = "none";
+    }
+    table_r.map(showMatch, table_r);
+}
+
+</script>
