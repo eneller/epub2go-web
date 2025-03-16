@@ -7,11 +7,16 @@ from epub2go.convert import get_all_books, Book, GBConvert
 import os
 
 converter = GBConvert(downloaddir=settings.MEDIA_ROOT)
+# TODO get from pickle
+books = get_all_books()
 
 def index(request: HttpRequest):
-    title = 'epub2go'
+    context = {
+        'title': 'epub2go',
+        'books': books,
+    }
+
     targetParam = request.GET.get('t', None)
-    books = get_all_books()
     if targetParam:
         epub = getEpub(targetParam)
         fname = os.path.join(settings.MEDIA_ROOT, epub)
@@ -21,7 +26,7 @@ def index(request: HttpRequest):
         response['Content-Disposition'] = f'attachment; filename="{os.path.basename(fname)}"'
         return response
 
-    return render(request, 'index.html', locals())
+    return render(request, 'index.html', context)
 
 def getEpub(param):
     print(param)
