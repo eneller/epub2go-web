@@ -13,6 +13,19 @@ h1,h2,h3{
 }
 
 /* custom styles here */
+:root{
+    --white:#faf0e673;
+}
+body{
+    background-color: var(--white)
+}
+header{
+    text-align: center;
+    justify-content: center;
+}
+.searchbar{
+    width: fit-content;
+}
 tr:nth-child(even){
     background-color: #EEEEEE;
 }
@@ -20,11 +33,22 @@ tr:hover{
     background-color: #DDDDDD;
     transition: all 2ms;
 }
-.table-icon{
+.inline-icon{
     vertical-align: middle;
     height: 1em;
 }
 .header-icon{
     vertical-align: middle;
     height: 1em;
+    padding: .5em;
+}
+a:hover, a:any-link{
+    text-decoration: none;
+    color: inherit;
+}
+.table-link{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
 }

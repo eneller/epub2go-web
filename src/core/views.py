@@ -18,6 +18,7 @@ gbnetloc = urlparse(allbooks_url).netloc
 def index(request: HttpRequest):
     context = {
         'title': 'epub2go',
+        'http_host': request.META['HTTP_HOST'],
         'books': books,
         'book_count': len(books),
     }
@@ -42,7 +43,7 @@ def validateUrl(param)->bool :
 
     return False
 
-@shared_task
+#@shared_task
 def getEpub(param):
     # TODO validate / sanitize input
     # TODO check for existing file and age
