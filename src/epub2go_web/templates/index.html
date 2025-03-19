@@ -11,7 +11,7 @@
     <header>
         <div>
         <h1>{{ title }}</h1>
-        <a href="javascript:void(window.open('{{ http_host }}/?t='+encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern"><!--TODO fix domain part as variable-->
+        <a href="javascript:void(window.open('http://{{ http_host }}/?t=' + encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern"><!--TODO fix domain part as variable-->
             <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
         </a>
         <a href="https://github.com/eneller/epub2go-web">
@@ -22,7 +22,7 @@
             <input type="search" id="searchInput" placeholder="Suche nach Titel" minlength="3">
             </form>
         </search>
-        <p>Im Moment finden sich hier {{ book_count }} Bücher. </p>
+        <small>Im Moment finden sich hier {{ book_count }} Bücher. </small>
     </header>
     <main>
         <!-- NOTE use dl here?-->

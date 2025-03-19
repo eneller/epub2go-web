@@ -23,6 +23,9 @@ header{
     text-align: center;
     justify-content: center;
 }
+small{
+    color: #777;
+}
 .searchbar{
     width: fit-content;
 }
