@@ -5,8 +5,8 @@ body{
     line-height:1.6;
     font-size:18px;
     color:#444;
-    padding:0
-    10px}
+    padding:0 10px;
+}
 
 h1,h2,h3{
     line-height:1.2
@@ -17,7 +17,8 @@ h1,h2,h3{
     --white:#faf0e673;
 }
 body{
-    background-color: var(--white)
+    background-color: var(--white);
+    font-family: serif;
 }
 header{
     text-align: center;
@@ -36,13 +37,11 @@ tr:hover{
     background-color: #DDDDDD;
     transition: all 2ms;
 }
-.inline-icon{
+.inline-icon, .header-icon{
     vertical-align: middle;
     height: 1em;
 }
 .header-icon{
-    vertical-align: middle;
-    height: 1em;
     padding: .5em;
 }
 a:hover, a:any-link{

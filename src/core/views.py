@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, FileResponse
+from django.http import HttpRequest, HttpResponse, FileResponse, HttpResponseBadRequest
 from django.conf import settings
 from celery import shared_task
 
@@ -24,19 +24,22 @@ def index(request: HttpRequest):
     }
 
     targetParam = request.GET.get('t', None)
-    if validateUrl(targetParam):
-        fpath = getEpub(targetParam)
-        fname = os.path.basename(fpath)
-        file = open(fpath, 'rb')
-        response = FileResponse(file)
-        response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = f'attachment; filename="{fname}"'
-        return response
-
-    return render(request, 'index.html', context)
+    if targetParam:
+        if validateUrl(targetParam):
+            # download file
+            fpath = getEpub(targetParam)
+            fname = os.path.basename(fpath)
+            file = open(fpath, 'rb')
+            response = FileResponse(file)
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = f'attachment; filename="{fname}"'
+            return response
+        else: return HttpResponseBadRequest('Input URL invalid.')
+    else:
+        # return base view
+        return render(request, 'index.html', context)
 
 def validateUrl(param)->bool :
-    if not param: return False
 
     netloc = urlparse(param).netloc
     if(netloc == gbnetloc): return True

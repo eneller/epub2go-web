@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Web Interface to epub2go.py"
 readme = "README.md"
 requires-python = ">=3.12"
+# TODO enable auto-reload using https://github.com/adamchainz/django-browser-reload
 dependencies = [
     "celery>=5.4.0",
     "django>=5.1.6",
