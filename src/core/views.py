@@ -25,12 +25,12 @@ def index(request: HttpRequest):
 
     targetParam = request.GET.get('t', None)
     if validateUrl(targetParam):
-        epub = getEpub(targetParam)
-        fname = os.path.join(settings.MEDIA_ROOT, epub)
-        file =  open(fname, 'rb')
+        fpath = getEpub(targetParam)
+        fname = os.path.basename(fpath)
+        file = open(fpath, 'rb')
         response = FileResponse(file)
         response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = f'attachment; filename="{os.path.basename(fname)}"'
+        response['Content-Disposition'] = f'attachment; filename="{fname}"'
         return response
 
     return render(request, 'index.html', context)
@@ -43,11 +43,8 @@ def validateUrl(param)->bool :
 
     return False
 
+# TODO make this async and show some indication of progress/loading
 #@shared_task
-def getEpub(param):
-    # TODO validate / sanitize input
+def getEpub(book_url):
     # TODO check for existing file and age
-    #GBConvert(param,downloaddir=settings.MEDIA_ROOT).run()
-    # TODO redirect to loading page
-    # TODO redirect to download page
-    raise NotImplementedError
+    return converter.download(book_url)
