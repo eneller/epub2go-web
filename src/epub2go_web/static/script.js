@@ -14,6 +14,7 @@ document.addEventListener('keydown', (event)=>{
 let searchParam = params.get('s');
 if (searchParam){
     searchInput.value = searchParam;
+    console.log(searchParam);
     search(searchParam);
 }
 
@@ -21,7 +22,8 @@ function submitSearch(event){
     event.preventDefault();
     search();
 }
-function search(searchStr = searchInput.value.toLowerCase()){
+function search(searchStr = searchInput.value){
+    searchStr= searchStr.toLowerCase();
     function showMatch(tr){
         // match search with list
         let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent.toLowerCase())
