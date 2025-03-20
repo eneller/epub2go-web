@@ -32,13 +32,13 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Title</th>
-                    <th>Author</th>
+                    <th>Titel</th>
+                    <th>Autor</th>
                 </tr>
             </thead>
             <tbody>
             {% for item in books %} 
-                <tr>
+                <tr class="table-entry">
                 <td>
                     <a href= {{ item.url }} target="_blank" rel="noopener noreferrer" class="table-link">
                         <img src="{% static 'open-link.svg' %}" alt="Open Link" class="inline-icon">
