@@ -15,10 +15,10 @@ function submitSearch(event){
     event.preventDefault();
     search();
 }
-function search(searchStr = searchInput.value){
+function search(searchStr = searchInput.value.toLowerCase()){
     function showMatch(tr){
         // match search with list
-        let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent)
+        let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent.toLowerCase())
             .join(' ')
             .indexOf(searchStr) > -1;
         if (searchSuccess) tr.style.display = "";

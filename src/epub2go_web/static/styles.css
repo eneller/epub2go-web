@@ -1,23 +1,27 @@
-/* this is part of the http://bettermotherfuckingwebsite.com/ */
+:root{
+    --bg:#faf0e673;
+    --bg-acc:#EEEEEE;
+    --bg-hover: #DDDDDD;
+    --fg:#444;
+    --fg-deemph: #777;
+}
 body{
     margin:40px auto;
     max-width:650px;
-    line-height:1.6;
+    line-height:1.4;
     font-size:18px;
-    color:#444;
+    color:var(--fg);
     padding:0 10px;
 }
 
 h1,h2,h3{
-    line-height:1.2
+    line-height:1.2;
+    letter-spacing: -2%;
 }
 
 /* custom styles here */
-:root{
-    --white:#faf0e673;
-}
 body{
-    background-color: var(--white);
+    background-color: var(--bg);
     font-family: serif;
 }
 header{
@@ -25,16 +29,16 @@ header{
     justify-content: center;
 }
 small{
-    color: #777;
+    color: var(--fg-deemph);
 }
 .searchbar{
     width: fit-content;
 }
 tr:nth-child(even){
-    background-color: #EEEEEE;
+    background-color: var(--bg-acc);
 }
 tr:hover{
-    background-color: #DDDDDD;
+    background-color: var(--bg-hover);
     transition: all 2ms;
 }
 .inline-icon, .header-icon{
@@ -43,6 +47,7 @@ tr:hover{
 }
 .header-icon{
     padding: .5em;
+    fill: var(--fg-deemph);
 }
 a:hover, a:any-link{
     text-decoration: none;

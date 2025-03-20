@@ -123,6 +123,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     PROJ_DIR / "static/",
 ]
+STATIC_ROOT = PROJ_DIR/ "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = PROJ_DIR / "media/"
