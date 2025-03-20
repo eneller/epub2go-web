@@ -18,7 +18,7 @@
             <input type="search" id="searchInput" placeholder="Suche nach Titel" minlength="3">
             </form>
         </search>
-        <small>Im Moment finden sich hier {{ book_count }} Bücher. </small>
+        <small>Im Moment finden sich hier <a href="{{ allbooks_url }}">{{ book_count }} Bücher.</a> </small>
             <a href="javascript:void(window.open('http://{{ http_host }}/?t=' + encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern"><!--TODO fix domain part as variable-->
                 <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
             </a>

@@ -12,7 +12,7 @@ import logging
 logger = logging.getLogger(__name__) #TODO configure logging
 
 converter = GBConvert(downloaddir=settings.MEDIA_ROOT)
-books = get_all_books()# TODO get from pickle
+books = sorted(get_all_books(), key= lambda b: b.title)# TODO get from pickle
 gbnetloc = urlparse(allbooks_url).netloc
 
 def index(request: HttpRequest):
@@ -21,6 +21,7 @@ def index(request: HttpRequest):
         'http_host': request.META['HTTP_HOST'],
         'books': books,
         'book_count': len(books),
+        'allbooks_url': allbooks_url,
     }
 
     targetParam = request.GET.get('t', None)
