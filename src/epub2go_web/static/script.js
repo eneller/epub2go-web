@@ -4,7 +4,13 @@ const searchInput = document.getElementById('searchInput');
 const table = document.getElementById('table');
 const table_r = Array.from(table.getElementsByTagName('tr'));
 
-// allow search from url parameter
+document.addEventListener('keydown', (event)=>{
+    if (event.ctrlKey && event.key === 'k'){
+        event.preventDefault();
+        searchInput.select();
+    }
+});
+// search from url parameter
 let searchParam = params.get('s');
 if (searchParam){
     searchInput.value = searchParam;
