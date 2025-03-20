@@ -2,11 +2,12 @@
 const params = new URLSearchParams(window.location.search);
 const searchInput = document.getElementById('searchInput');
 const table = document.getElementById('table');
-const table_r = Array.from(table.getElementsByTagName('tr'));
+const table_r = Array.from(table.getElementsByClassName('table-entry'));
 
 document.addEventListener('keydown', (event)=>{
     if (event.ctrlKey && event.key === 'k'){
         event.preventDefault();
+        searchInput.focus();
         searchInput.select();
     }
 });
