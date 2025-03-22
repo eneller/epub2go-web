@@ -73,6 +73,7 @@ a:hover, a:any-link{
     /* TODO fix links with no title/content being almost unclickable */
     display: block;
     width: 100%;
+    min-height: 1em;
     height: 100%;
     padding: 1px;
 }
