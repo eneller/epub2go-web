@@ -18,7 +18,7 @@ gbnetloc = urlparse(allbooks_url).netloc
 def index(request: HttpRequest):
     context = {
         'title': 'epub2go',
-        'http_host': request.META['HTTP_HOST'],
+        'http_host': f'http://{ request.META['HTTP_HOST'] }',
         'books': books,
         'book_count': len(books),
         'allbooks_url': allbooks_url,
