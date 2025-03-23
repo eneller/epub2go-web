@@ -11,12 +11,13 @@ html{
 }
 body{
     background-color: var(--bg);
-    margin:40px auto;
-    max-width:800px;
+    overflow-x: hidden;
+    margin:.5em auto;
+    max-width:min(100%,800px);
     line-height:1.4;
     font-size:18px;
     color:var(--fg);
-    padding:0 10px;
+    padding:0 .2em;
 }
 
 h1,h2,h3{
@@ -46,6 +47,7 @@ small{
 table, tr{
     /* make table not resize when elements are hidden by searching */
     width: 100%;
+    word-break: break-all;
 }
 th{
     text-align: left;
@@ -70,7 +72,6 @@ a:hover, a:any-link{
     color: inherit;
 }
 .table-link{
-    /* TODO fix links with no title/content being almost unclickable */
     display: block;
     width: 100%;
     min-height: 1em;
