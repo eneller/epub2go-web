@@ -48,6 +48,9 @@ small{
     border-color: var(--bg-acc);
     box-shadow: var(--bg-acc) 2px 2px;
 }
+.main-banner{
+    text-align: center;
+}
 table, tr{
     /* make table not resize when elements are hidden by searching */
     width: 100%;
