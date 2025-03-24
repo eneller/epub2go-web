@@ -38,7 +38,7 @@ def index(request: HttpRequest):
         else: return HttpResponseBadRequest('Input URL invalid.')
     else:
         # return base view
-        return render(request, 'index.html', context)
+        return render(request, 'home.html', context)
 
 def validateUrl(param)->bool :
 

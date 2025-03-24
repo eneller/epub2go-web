@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block main %}
+<main>
+    <div class="search-container">
+        <search>
+            <form onsubmit="submitSearch(event)" class="search-bar">
+            <input type="search" id="searchInput" placeholder="Suche nach Titel" minlength="3">
+            </form>
+        </search>
+        <small>Im Moment finden sich hier <a href="{{ allbooks_url }}">{{ book_count }} Bücher.</a> </small>
+        <a href="javascript:void(window.open('{{ http_host }}/?t=' + encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern">
+            <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
+        </a>
+        <a href="https://github.com/eneller/epub2go-web">
+            <img src="{% static 'github.svg' %}" alt="GitHub" class="header-icon">
+        </a>
+    </div>
+    <!-- NOTE use dl here?-->
+    <table id="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Titel</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in books %} 
+            <tr class="table-entry">
+            <td>
+                <a href= {{ item.url }} target="_blank" rel="noopener noreferrer" class="table-link">
+                    <img src="{% static 'open-link.svg' %}" alt="Open Link" class="inline-icon">
+                </a>
+            </td>
+            <td class="table-data">
+                <a href="./?t= {{ item.url }}" class="table-link">
+                {{ item.title }}
+                </a>
+            </td> 
+            <td>
+                <a> {{ item.author }}</a>
+            </td>
+            </tr>
+        {% endfor %} 
+        </tbody>
+    </table>
+</main>
+{% endblock %} 
