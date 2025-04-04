@@ -1,17 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, FileResponse, HttpResponseBadRequest
-from django.conf import settings
-from celery import shared_task
 
-from epub2go.convert import get_all_books, Book, GBConvert, allbooks_url
+from epub2go.convert import get_all_books, Book, allbooks_url
 
 import os
 from urllib.parse import urlparse
 import logging
 
+from epub2go_web.tasks import getEpub
+
 logger = logging.getLogger(__name__) #TODO configure logging
 
-converter = GBConvert(downloaddir=settings.MEDIA_ROOT)
 books = sorted(get_all_books(), key= lambda b: b.title)# TODO get from pickle
 gbnetloc = urlparse(allbooks_url).netloc
 
@@ -28,7 +27,8 @@ def index(request: HttpRequest):
     if targetParam:
         if validateUrl(targetParam):
             # download file
-            fpath = getEpub(targetParam)
+            result = getEpub.delay(targetParam)
+            fpath = result.get(timeout=60)
             fname = os.path.basename(fpath)
             file = open(fpath, 'rb')
             response = FileResponse(file)
@@ -46,9 +46,3 @@ def validateUrl(param)->bool :
     if(netloc == gbnetloc): return True
 
     return False
-
-# TODO make this async and show some indication of progress/loading
-#@shared_task
-def getEpub(book_url):
-    # TODO check for existing file and age
-    return converter.download(book_url)

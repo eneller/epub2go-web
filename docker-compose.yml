@@ -1,0 +1,6 @@
+name: task-queue
+services:
+    redis:
+        ports:
+            - 6379:6379
+        image: redis
