@@ -15,13 +15,13 @@ document.addEventListener('keydown', (event)=>{
 let searchParam = params.get('s');
 if (searchParam){
     searchInput.value = searchParam;
-    console.log(searchParam);
     search(searchParam);
 }
 
 function submitSearch(event){
     event.preventDefault();
-    search();
+    let path =  window.location.pathname + "./?s="+encodeURIComponent(searchInput.value);
+    window.location.href= path;
 }
 function search(searchStr = searchInput.value){
     searchStr= searchStr.toLowerCase();
