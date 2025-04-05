@@ -15,15 +15,10 @@ books = sorted(get_all_books(), key= lambda b: b.title)# TODO get from pickle
 gbnetloc = urlparse(allbooks_url).netloc
 
 def index(request: HttpRequest):
-    context = {
-        'title': 'epub2go',
-        'http_host': f'http://{ request.META['HTTP_HOST'] }',
-        'books': books,
-        'book_count': len(books),
-        'allbooks_url': allbooks_url,
-    }
+    localbooks = books
 
     targetParam = request.GET.get('t', None)
+    searchParam = request.GET.get('s', None)
     if targetParam:
         if validateUrl(targetParam):
             # download file
@@ -36,9 +31,18 @@ def index(request: HttpRequest):
             response['Content-Disposition'] = f'attachment; filename="{fname}"'
             return response
         else: return HttpResponseBadRequest('Input URL invalid.')
-    else:
-        # return base view
-        return render(request, 'home.html', context)
+    elif searchParam:
+        localbooks = [book for book in books if searchParam in book.title]
+
+    # return base view
+    context = {
+        'title': 'epub2go',
+        'http_host': f'http://{ request.META['HTTP_HOST'] }',
+        'books': localbooks,
+        'book_count': len(books),
+        'allbooks_url': allbooks_url,
+    }
+    return render(request, 'home.html', context)
 
 def validateUrl(param)->bool :
 

@@ -15,23 +15,10 @@ document.addEventListener('keydown', (event)=>{
 let searchParam = params.get('s');
 if (searchParam){
     searchInput.value = searchParam;
-    search(searchParam);
 }
 
 function submitSearch(event){
     event.preventDefault();
     let path =  window.location.pathname + "./?s="+encodeURIComponent(searchInput.value);
     window.location.href= path;
-}
-function search(searchStr = searchInput.value){
-    searchStr= searchStr.toLowerCase();
-    function showMatch(tr){
-        // match search with list
-        let searchSuccess = Array.from(tr.getElementsByClassName('table-data')).map(e => e.textContent.toLowerCase())
-            .join(' ')
-            .indexOf(searchStr) > -1;
-        if (searchSuccess) tr.style.display = "";
-        else tr.style.display = "none";
-    }
-    table_r.map(showMatch, table_r);
 }
