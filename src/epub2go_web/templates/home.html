@@ -16,7 +16,7 @@
             <img src="{% static 'github.svg' %}" alt="GitHub" class="header-icon">
         </a>
     </div>
-    <!-- NOTE use dl here?-->
+    <small>{{ page.paginator.count }} Ergebnisse gefunden:</small>
     <table id="table">
         <thead>
             <tr>
@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for item in books %} 
+        {% for item in page.object_list %} 
             <tr class="table-entry">
             <td>
                 <a href= {{ item.url }} target="_blank" rel="noopener noreferrer" class="table-link">
@@ -45,6 +45,17 @@
         {% endfor %} 
         </tbody>
     </table>
-    <small>{{ books_count }} Ergebnisse gefunden</small>
+    {% if page.has_other_pages %}
+    <div class="pagination">
+        {% if page.has_previous %}
+            <a href="?p=1"> &lt;&lt; </a>
+            <a href="?p={{ page.previous_page_number }}"> &lt; </a>
+        {% endif %}
+        {% if page.has_next %}
+            <a href="?p={{ page.next_page_number }}"> &gt; </a>
+            <a href="?p={{ page.paginator.num_pages }}"> &gt;&gt; </a>
+        {% endif %}
+    </div>
+    {% endif %}
 </main>
 {% endblock %} 

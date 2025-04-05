@@ -18,6 +18,8 @@ body{
     font-size:18px;
     color:var(--fg);
     padding:0 .2em;
+    text-align: center;
+    justify-content: center;
 }
 
 h1,h2,h3{
@@ -84,4 +86,7 @@ a:hover, a:any-link{
     min-height: 1em;
     height: 100%;
     padding: 1px;
+}
+.pagination a{
+    padding-left: 2em;
 }

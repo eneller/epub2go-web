@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, FileResponse, HttpResponseBadRequest
+from django.core.paginator import Paginator
 
 from epub2go.convert import get_all_books, Book, allbooks_url
 
@@ -34,16 +35,26 @@ def index(request: HttpRequest):
     elif searchParam:
         localbooks = [book for book in books if searchParam in book.title]
 
-    # return base view
-    # TODO pagination
+    # paginate items
+    paginationParam = request.GET.get('p', '')
+    try:
+        pageNo = int(paginationParam)
+    except ValueError:
+        logger.error('Failed to cast %s to int', paginationParam)
+        pageNo = 1
+
+    pages = Paginator(localbooks, 100)
+    if pageNo < 1 or pageNo > pages.num_pages:
+        pageNo = 1
+    page = pages.page(pageNo)
     context = {
         'title': 'epub2go',
         'http_host': f'http://{ request.META['HTTP_HOST'] }',
-        'books': localbooks,
-        'books_count': len(localbooks),
+        'page': page,
         'allbooks_count': len(books),
         'allbooks_url': allbooks_url,
     }
+    # return base view
     return render(request, 'home.html', context)
 
 def validateUrl(param)->bool :
