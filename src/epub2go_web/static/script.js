@@ -22,3 +22,9 @@ function submitSearch(event){
     let path =  window.location.pathname + "./?s="+encodeURIComponent(searchInput.value);
     window.location.href= path;
 }
+
+function buildURI(p){
+    let params = new URLSearchParams(window.location.search);
+    params.set('p', p);
+    return `${window.location.pathname}?${params.toString()}`;
+}

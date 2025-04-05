@@ -20,7 +20,7 @@ PROJ_DIR = BASE_DIR / 'epub2go_web'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret! TODO
 SECRET_KEY = "django-insecure-^@m5bl*8x+=@c^b0lhkgb-%_#9#&oad=v15jq=!0$g#x17zjf8"
 
 # SECURITY WARNING: don't run with debug turned on in production!

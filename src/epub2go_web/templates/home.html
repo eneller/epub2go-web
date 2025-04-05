@@ -48,12 +48,12 @@
     {% if page.has_other_pages %}
     <div class="pagination">
         {% if page.has_previous %}
-            <a href="?p=1"> &lt;&lt; </a>
-            <a href="?p={{ page.previous_page_number }}"> &lt; </a>
+            <a onclick="window.location.href = buildURI(1)" href="#"> &lt;&lt; </a>
+            <a onclick="window.location.href = buildURI('{{ page.previous_page_number }}')" href="#"> &lt; </a>
         {% endif %}
         {% if page.has_next %}
-            <a href="?p={{ page.next_page_number }}"> &gt; </a>
-            <a href="?p={{ page.paginator.num_pages }}"> &gt;&gt; </a>
+            <a onclick="window.location.href = buildURI('{{ page.next_page_number }}')" href="#"> &gt; </a>
+            <a onclick="window.location.href = buildURI('{{ page.paginator.num_pages }}')" href="#"> &gt;&gt; </a>
         {% endif %}
     </div>
     {% endif %}
