@@ -8,7 +8,7 @@
             <input type="search" id="searchInput" placeholder="Suche nach Titel" minlength="3">
             </form>
         </search>
-        <small>Im Moment finden sich hier <a href="{{ allbooks_url }}">{{ book_count }} Bücher.</a> </small>
+        <small>Im Moment finden sich hier <a href="{{ allbooks_url }}">{{ allbooks_count }} Bücher.</a> </small>
         <a href="javascript:void(window.open('{{ http_host }}/?t=' + encodeURIComponent(window.location.toString())))" title="Als Lesezeichen speichern">
             <img src="{% static 'bookmark.svg' %}" alt="Bookmarklet" class="header-icon">
         </a>
@@ -45,5 +45,6 @@
         {% endfor %} 
         </tbody>
     </table>
+    <small>{{ books_count }} Ergebnisse gefunden</small>
 </main>
 {% endblock %} 

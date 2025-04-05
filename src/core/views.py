@@ -35,11 +35,13 @@ def index(request: HttpRequest):
         localbooks = [book for book in books if searchParam in book.title]
 
     # return base view
+    # TODO pagination
     context = {
         'title': 'epub2go',
         'http_host': f'http://{ request.META['HTTP_HOST'] }',
         'books': localbooks,
-        'book_count': len(books),
+        'books_count': len(localbooks),
+        'allbooks_count': len(books),
         'allbooks_url': allbooks_url,
     }
     return render(request, 'home.html', context)
