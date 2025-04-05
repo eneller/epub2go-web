@@ -18,7 +18,6 @@ body{
     font-size:18px;
     color:var(--fg);
     padding:0 .2em;
-    text-align: center;
     justify-content: center;
 }
 
@@ -86,6 +85,10 @@ a:hover, a:any-link{
     min-height: 1em;
     height: 100%;
     padding: 1px;
+}
+.pagination{
+    display: flex;
+    justify-content: center;
 }
 .pagination a{
     padding-left: 2em;
