@@ -4,3 +4,5 @@ A simple Website to provide a `NNI (Non-Nerd Interface)` to [epub2go.py](https:/
 ## Development
 This project uses [watchman](https://facebook.github.io/watchman/) for file watching and reloading.
 Follow the [official instructions](https://facebook.github.io/watchman/docs/install.html) for your system to install, django will default to its standard watcher otherwise.
+
+Also, [celery](https://docs.celeryq.dev/en/stable/) is used as a task queue with [redis](https://hub.docker.com/_/redis) as backend.
