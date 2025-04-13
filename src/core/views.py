@@ -33,7 +33,7 @@ def index(request: HttpRequest):
             return response
         else: return HttpResponseBadRequest('Input URL invalid.')
     elif searchParam:
-        localbooks = [book for book in books if searchParam in book.title]
+        localbooks = [book for book in books if searchParam.lower() in book.title.lower()]
 
     # paginate items
     paginationParam = request.GET.get('p', '')
