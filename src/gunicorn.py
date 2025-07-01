@@ -5,7 +5,7 @@ loglevel = "debug"
 # The number of worker processes for handling requests
 workers = 4
 # The socket to bind
-bind = "127.0.0.1:50000"
+bind = "0.0.0.0:50000"
 # Restart workers when code changes (development only!)
 #reload = True
 # Write access and error info to /var/log
