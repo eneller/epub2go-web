@@ -21,10 +21,6 @@ python manage.py runserver
 ```
 
 ## Deployment
-Follow the Development instructions, except replace the final command for the development server with
-```bash
-gunicorn -c gunicorn.py
-```
 [Gunicorn](https://gunicorn.org/) does not serve static files and is intended to be deployed behind [nginx](https://nginx.org/).
 An example configuration is provided in `nginx.conf`.
 
@@ -33,3 +29,14 @@ To collect the static files for nginx, run
 python manage.py collectstatic
 ```
 and point nginx to the resulting folder.
+
+### Docker
+Run the `docker-compose.yml` in the project root using
+```bash
+docker compose up
+```
+### Manual
+Follow the Development instructions, except replace the final command for the development server with
+```bash
+gunicorn -c gunicorn.py
+```
