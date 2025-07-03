@@ -12,7 +12,7 @@ services:
         env_file:
             - .env
         volumes:
-            - ./data:/app/src/epub2go_web/media
+            - ./.docker/data:/app/src/epub2go_web/media
     redis:
         image: redis
     celery:
@@ -22,6 +22,6 @@ services:
             - app
         env_file:
             - .env
-        volumes:
-            - ./data:/app/src/epub2go_web/media
         command: uv run --directory=/app/src celery -A epub2go_web worker --loglevel=INFO
+        volumes_from:
+            - app
