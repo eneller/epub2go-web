@@ -10,11 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import environ
+
+import os
 from pathlib import Path
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-PROJ_DIR = BASE_DIR / 'epub2go_web'
+PROJ_DIR = Path(__file__).resolve().parent
+BASE_DIR = PROJ_DIR.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -78,8 +87,8 @@ DATABASES = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', default="redis://localhost:6379/0")
 CELERY_TASK_ALWAYS_EAGER = True
 
 # Static files (CSS, JavaScript, Images)

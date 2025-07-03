@@ -1,0 +1,23 @@
+name: epub2go-web
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: epub2go_web:latest
+        depends_on:
+            - redis
+        ports:
+            - "50000:50000"
+        env_file:
+            - .env
+    redis:
+        image: redis
+    celery:
+        image: epub2go_web:latest
+        depends_on:
+            - redis
+            - app
+        env_file:
+            - .env
+        command: uv run --directory=/app/src celery -A epub2go_web worker --loglevel=INFO
