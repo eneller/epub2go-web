@@ -2,11 +2,13 @@ FROM python:3.12
 VOLUME [ "/app/src/epub2go_web/media" ]
 EXPOSE 50000/tcp
 EXPOSE 50000/udp
+ENV DJANGO_DEBUG=FALSE
 
 COPY --from=ghcr.io/astral-sh/uv:0.7.18 /uv /uvx /bin/
 
 WORKDIR /app
 # Install dependencies
+RUN apt-get update
 RUN apt-get install -y pandoc
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \

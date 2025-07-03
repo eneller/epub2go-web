@@ -15,11 +15,6 @@ import environ
 import os
 from pathlib import Path
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJ_DIR = Path(__file__).resolve().parent
@@ -33,7 +28,7 @@ BASE_DIR = PROJ_DIR.parent
 SECRET_KEY = "django-insecure-^@m5bl*8x+=@c^b0lhkgb-%_#9#&oad=v15jq=!0$g#x17zjf8"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
 
