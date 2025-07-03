@@ -7,10 +7,11 @@ COPY --from=ghcr.io/astral-sh/uv:0.7.18 /uv /uvx /bin/
 
 WORKDIR /app
 # Install dependencies
+RUN apt-get install -y pandoc
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-install-project
+    uv sync --locked --no-install-project --no-dev
 
 # Copy the project into the image
 ADD . /app
