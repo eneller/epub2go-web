@@ -9,3 +9,6 @@ converter = GBConvert(downloaddir=settings.MEDIA_ROOT)
 def getEpub(book_url):
     # TODO check for existing file and age
     return converter.download(book_url)
+
+def getDir(book_url):
+    return converter.getDir(book_url)

@@ -5,12 +5,14 @@ from django.core.paginator import Paginator
 from epub2go.convert import get_all_books, Book, allbooks_url
 
 import os
+import glob
 from urllib.parse import urlparse
 import logging
 
-from epub2go_web.tasks import getEpub
+from epub2go_web.tasks import getEpub, getDir
 
 logger = logging.getLogger(__name__) #TODO configure logging
+logging.basicConfig(level=logging.INFO,format='%(asctime)s - %(levelname)s - %(message)s')
 
 books = sorted(get_all_books(), key= lambda b: b.title)# TODO get from pickle
 books_count = len(books)
@@ -24,9 +26,16 @@ def index(request: HttpRequest):
     searchParam = request.GET.get('s', None)
     if targetParam:
         if validateUrl(targetParam):
-            # download file
-            result = getEpub.delay(targetParam)
-            fpath = result.get(timeout=60)
+            # does an epub already exist?
+            dir_download = getDir(targetParam)
+            listDir = glob.glob('*.epub', root_dir=dir_download)
+            if len(listDir) != 0:
+                fpath = os.path.join(dir_download, listDir[0])
+                logger.info('Found existing file at %s', fpath)
+            else:
+                # download file
+                result = getEpub.delay(targetParam)
+                fpath = result.get(timeout=60)
             fname = os.path.basename(fpath)
             file = open(fpath, 'rb')
             response = FileResponse(file)
