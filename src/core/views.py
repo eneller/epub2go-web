@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, FileResponse, HttpResponseBadRequest
+from django.http import HttpRequest, FileResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator
 
-from epub2go.convert import get_all_books, Book, allbooks_url
+from epub2go.convert import get_all_books, allbooks_url
 
 import os
 import glob
@@ -35,7 +35,7 @@ def index(request: HttpRequest):
             else:
                 # download file
                 result = getEpub.delay(targetParam)
-                fpath = result.get(timeout=60)
+                fpath = result.get(timeout=120)
             fname = os.path.basename(fpath)
             file = open(fpath, 'rb')
             response = FileResponse(file)
