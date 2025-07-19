@@ -13,6 +13,7 @@ services:
             - .env
         volumes:
             - ./.docker/data:/app/src/epub2go_web/media
+        restart: unless-stopped
     redis:
         image: redis
     celery:
@@ -25,3 +26,4 @@ services:
         command: uv run --directory=/app/src celery -A epub2go_web worker --loglevel=INFO
         volumes_from:
             - app
+        restart: unless-stopped
