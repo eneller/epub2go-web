@@ -16,7 +16,12 @@ dependencies = [
 [tool.uv.sources]
 epub2go = { git = "https://github.com/eneller/epub2go.py" }
 
+[tool.sonar]
+# must be unique in a given SonarQube Server/SonarQube Cloud instance
+projectKey="epub2go_web"
+
 [dependency-groups]
 dev = [
+    "pysonar>=1.0.2.1722",
     "pywatchman>=3.0.0",
 ]

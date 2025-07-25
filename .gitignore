@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode,intellij+all
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,visualstudiocode,intellij+all
+# Created by https://www.toptal.com/developers/gitignore/api/django,python,intellij+all,visualstudiocode,sonar
+# Edit at https://www.toptal.com/developers/gitignore?templates=django,python,intellij+all,visualstudiocode,sonar
 
 ### Django ###
 *.log
@@ -132,6 +132,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env
 .venv
 env/
 venv/
@@ -350,6 +351,10 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+### Sonar ###
+#Sonar generated dir
+/.sonar/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -369,7 +374,7 @@ pyrightconfig.json
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode,intellij+all
+# End of https://www.toptal.com/developers/gitignore/api/django,python,intellij+all,visualstudiocode,sonar
 
 staticfiles/
 .docker/
