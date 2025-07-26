@@ -11,24 +11,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import environ
-
-import os
 from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 PROJ_DIR = Path(__file__).resolve().parent
 BASE_DIR = PROJ_DIR.parent
+env = environ.Env(
+    DJANGO_DEBUG=(bool, True),
+)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret! TODO
-SECRET_KEY = "django-insecure-^@m5bl*8x+=@c^b0lhkgb-%_#9#&oad=v15jq=!0$g#x17zjf8"
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', True)
+DEBUG = env('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,8 +83,8 @@ DATABASES = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', default="redis://localhost:6379/0")
+CELERY_BROKER_URL = env.cache('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = env.cache('CELERY_RESULT_BACKEND', default='redis://localhost:6379/0')
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_SOFT_TIME_LIMIT = 300
 CELERY_TASK_TIME_LIMIT = 360
