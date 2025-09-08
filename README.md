@@ -9,7 +9,7 @@ To run the server, install the dependencies described in `pyproject.toml` and `u
 in a virtual environment, ideally using [uv](https://docs.astral.sh/uv/) (or pip).
 
 [Celery](https://docs.celeryq.dev/en/stable/) is used as a task queue with [redis](https://hub.docker.com/_/redis) as backend.
-A container for it is provided in the `docker-compose.yml`.
+A container for it is provided in the `src/docker-compose.yml`.
 After the container is up, simply start your Celery workers from `src/` using
 ```bash
 celery -A epub2go_web worker --loglevel=INFO
